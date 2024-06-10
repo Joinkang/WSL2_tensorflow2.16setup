@@ -41,3 +41,23 @@ cat /usr/local/cuda/include/cudnn_version.h | grep CUDNN_MAJOR -A 2
       #define CUDNN_VERSION (CUDNN_MAJOR * 1000 + CUDNN_MINOR * 100 + CUDNN_PATCHLEVEL)
       
       /* cannot use constexpr here since this is a C-only file */
+
+python
+from tensorflow.python.client import device_lib
+print(device_lib.list_local_devices())
+
+
+                [name: "/device:CPU:0"
+                device_type: "CPU"
+                memory_limit: 268435456
+                locality {
+                }
+                incarnation: 10913850956262110810
+                xla_global_id: -1
+                , name: "/device:GPU:0"
+                device_type: "GPU"
+                memory_limit: 22515023872
+                locality {
+                  bus_id: 1
+                  links {
+                  }
