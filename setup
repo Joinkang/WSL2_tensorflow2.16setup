@@ -7,3 +7,37 @@ sudo dpkg -i cuda-repo-wsl-ubuntu-12-3-local_12.3.0-1_amd64.deb
 sudo cp /var/cuda-repo-wsl-ubuntu-12-3-local/cuda-*-keyring.gpg /usr/share/keyrings/
 sudo apt-get update
 sudo apt-get -y install cuda-toolkit-12-3
+
+
+
+export PATH=/usr/local/cuda-12.3/bin${PATH:+:${PATH}}
+        
+        nvcc: NVIDIA (R) Cuda compiler driver
+        Copyright (c) 2005-2023 NVIDIA Corporation
+        Built on Fri_Sep__8_19:17:24_PDT_2023
+        Cuda compilation tools, release 12.3, V12.3.52
+        Build cuda_12.3.r12.3/compiler.33281558_0
+
+
+#download cudnn8.9
+
+tar xvf cudnn-linux-x86_64-8.9.0.131_cuda12-archive.tar.xz
+
+sudo cp cudnn-linux-x86_64-8.9.0.131_cuda12-archive/include/cudnn*.h /usr/local/cuda/include
+sudo cp cudnn-linux-x86_64-8.9.0.131_cuda12-archive/lib/libcudnn* /usr/local/cuda/lib64
+sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
+
+sudo vi ~/.bashrc
+source ~/.bashrc
+#add commands at the bottoms
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-12.3/lib64/
+
+
+cat /usr/local/cuda/include/cudnn_version.h | grep CUDNN_MAJOR -A 2
+      #define CUDNN_MAJOR 8
+      #define CUDNN_MINOR 9
+      #define CUDNN_PATCHLEVEL 0
+      --
+      #define CUDNN_VERSION (CUDNN_MAJOR * 1000 + CUDNN_MINOR * 100 + CUDNN_PATCHLEVEL)
+      
+      /* cannot use constexpr here since this is a C-only file */
