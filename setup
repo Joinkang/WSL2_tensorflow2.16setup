@@ -30,7 +30,9 @@ sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
 sudo vi ~/.bashrc
 source ~/.bashrc
 #add commands at the bottoms
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-12.3/lib64/
+
+export PATH=/usr/local/cuda-12.3/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda-12.3/lib64:$LD_LIBRARY_PATH
 
 
 cat /usr/local/cuda/include/cudnn_version.h | grep CUDNN_MAJOR -A 2
